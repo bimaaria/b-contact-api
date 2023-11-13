@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { GetContactDto } from './dto/get-contact-dto';
+import { CreateContactDto } from './dto/create-contact.dto';
 
 @Injectable()
 export class ContactService {
@@ -8,6 +9,9 @@ export class ContactService {
 
   async getAll(): Promise<GetContactDto[] | []> {
     return this.prisma.contact.findMany();
-    // return [];
+  }
+
+  async create(data: CreateContactDto) {
+    return await this.prisma.contact.create({ data });
   }
 }
